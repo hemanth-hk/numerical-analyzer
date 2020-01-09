@@ -1,80 +1,66 @@
 <script>
+  export let visible;
+  export let equation;
+  export let h;
+  export let fxy;
+  export let method;
+	function typewriter(node, { speed = 30 }) {
+		const valid = (
+			node.childNodes.length === 1 &&
+			node.childNodes[0].nodeType === 3
+		);
+
+		if (!valid) {
+			throw new Error(`This transition only works on elements with a single text node child`);
+		}
+
+		const text = node.textContent;
+		const duration = text.length * speed;
+
+		return {
+			duration,
+			tick: t => {
+				const i = ~~(text.length * t);
+				node.textContent = text.slice(0, i);
+			}
+		};
+	}
 </script>
 
 <main class="container" id="screen">
 <div class="columns">
 <div class="column here has-background-light">
-<section class="hero is-fullheight">
+{#if visible}
+<section class="hero is-large">
+      <h1 class="title" in:typewriter>Solution</h1>
+    <div class="container">
+      <p in:typewriter>{equation}</p>
+      <p in:typewriter>{method}</p>
+      <p in:typewriter>{h}</p>
+      <p in:typewriter>{fxy}</p>
+    </div>
+</section>
+{/if}
+</div>
+<div class="column here has-background-light">
+{#if visible}
+<section class="hero is-large">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title">
-        Fullheight title
-      </h1>
-      <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
+
+	<p in:typewriter>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo expedita reprehenderit, sequi quasi deserunt, saepe voluptate,
+     repellat iusto quam aliquid vitae quod consequatur labore ratione unde eius aspernatur optio?
+	</p>
+
     </div>
   </div>
 </section>
+  {/if}
 </div>
 
-<div class="column here has-background-light">
-<section class="hero is-fullheight">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        Fullheight title
-      </h1>
-      <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
-    <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
-      <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
-      <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
-      <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
-      <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, id accusamus beatae dolor, voluptatum totam exercitationem impedit nulla reiciendis magni autem repellat magnam porro quae dolorum alias sint quaerat maiores?</p>
-      <br>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe aperiam incidunt ad quibusdam, natus exercitationem quisquam maiores nesciunt numquam adipisci atque distinctio autem, eveniet molestiae sunt culpa odit vitae. Qui?</p>
-            <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
-            <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
-            <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
-            <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
-            <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
-            <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
-            <h2 class="subtitle">
-        Fullheight subtitle
-      </h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis deserunt enim perferendis suscipit voluptatibus magnam facere quo. Dolorem quasi, quis iure nesciunt accusantium blanditiis cumque tenetur eius beatae consequatur provident!</p>
-    </div>
-  </div>
-</section>
-</div>
 </div>
 </main>
-
 <style>
 .here{
     overflow-y: scroll;
