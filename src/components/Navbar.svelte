@@ -5,7 +5,7 @@
   </div>
     <div class="navbar-end">
     <span class="navbar-item">
-        <a href="!#" class="button is-size-5">
+        <a href="https://github.com/hemanth-hk/numerical-analyzer" target="_blank" class="button is-size-5">
         <span class="icon">
             <i class="fab fa-github"></i>
         </span>
