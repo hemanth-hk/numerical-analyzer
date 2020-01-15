@@ -1,40 +1,34 @@
 <script>
-  import Chart from 'chart.js';
+
+import EFM from '../algo/EulerForwardMethod.js'
+
+  import Chart from 'chart.js'
   import { onMount } from 'svelte';
-  export let visible;
   export let equation;
   export let h;
   export let fxy;
   export let method;
+  export let lowerLimit;
+  export let upperLimit;
+  export let plot;
+  export let initialValue
 
+  let ctx,myChart;
 
-  let drawChart = () => {
-    let ctx = document.getElementById('myChart');
-    let myChart = new Chart(ctx, {
+  let drawChart = (plotData, plotLabels) => {
+    if(myChart) myChart.destroy();
+
+    ctx = document.getElementById('mychart')
+    myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: plotLabels,
         datasets: [{
-            label: '# of Votes',
             fill : false,
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 3
+            data: plotData,
+            backgroundColor: '#22d1ee',
+            borderColor: '#3d5af1',
+            borderWidth: 2
         }]
     },
     options: {
@@ -44,23 +38,50 @@
                     beginAtZero: true
                 }
             }]
+        },
+        legend: {
+        display: false
+        },
+        tooltips: {
+            callbacks: {
+            label: function(tooltipItem) {
+                    return tooltipItem.yLabel;
+            }
+            }
         }
     }
 });
   }
 
   onMount(() => {
-      drawChart();
+      drawChart([],[])
   });
+
+  $: if(plot){
+      console.log('From Scrren',plot)
+    let data = EFM(fxy,h,lowerLimit,upperLimit,initialValue)
+      drawChart(data.yval,data.xval)
+      plot = !plot
+  }  
+
 </script>
 <div class="container">
-<canvas id="myChart" width="3" height="1"></canvas>
-<p>{ visible }</p>
-<p>{ fxy }</p>
-<p>{ method }</p>
-<p>{ h }</p>
-<p>{ equation }</p>
+    <br><br>
+    <h3 class="is-size-4 has-text-centered">Approximate curve of <span class="tag is-large">y = f(x)</span></h3>
+    <br>
+    <canvas id="mychart" width="3" height="1"></canvas>
 </div>
+<br>
+<div class="container has-text-centered">
+    <h3 class="is-size-3">Solution</h3>
+    <br>
+    <p>fxy : { fxy }</p>
+    <p>method : { method }</p>
+    <p>h : { h }</p>
+    <p>equation : { equation }</p>
+    <p>initialValue : {initialValue}</p>
+</div>
+
 <style>
 
 </style>

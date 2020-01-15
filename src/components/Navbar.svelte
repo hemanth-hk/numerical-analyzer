@@ -1,4 +1,4 @@
-<nav class="navbar is-light">
+<nav class="navbar">
     <div class="container">
   <div class="navbar-brand">
     <h1 class="title">Numerical Analyzer</h1>
@@ -18,5 +18,18 @@
 <style>
 .title{
     padding: 1.5rem;
+}
+nav{
+  background-color: #393c83;
+}
+.title{
+  color: white;
+  font-weight: lighter;
+}
+.button{
+  background-color: #3f4080;
+}
+.icon{
+  color: white;
 }
 </style>
