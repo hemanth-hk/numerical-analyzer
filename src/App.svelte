@@ -9,6 +9,7 @@
   let lowerLimit = 0;
   let upperLimit;
   let initialValue;
+  let analyticalFunction
   let plot = false;
 
 
@@ -119,7 +120,31 @@
         </div>
     </div>
 </div>
-<br><br>
+<br>
+<div class="optional">
+<br>
+<p class="is-size-6 has-text-centered">This is an optional input. If you know the analytical solution
+                                        of the diffrential equation and want to plot along-with
+                                         numerical solution, then input the equation</p><br>
+<div class="level">
+    <div class="level-item has-text-centered">
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">y=&nbsp;</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <p class="control">
+                        <input class="input is-primary" bind:value={analyticalFunction} on:change={() => plot = false} type="text" placeholder="f(x)">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+</div>
+<br>
 <div class="level">
     <div class="level-item has-text-centered">
         <button class="button is-primary" on:click={() => {
@@ -134,7 +159,7 @@
 </div>
 <br>
 </main>
-<Screen {equation}{h}{fxy}{method}{lowerLimit}{upperLimit}{plot}{initialValue}/>
+<Screen {equation}{h}{fxy}{method}{lowerLimit}{upperLimit}{plot}{initialValue}{analyticalFunction}/>
 
 <style>
 .field-label{
@@ -145,5 +170,9 @@ main{
 }
 .label{
     color: white;
+}
+.optional{
+    color: white;
+    background-color: #353796
 }
 </style>

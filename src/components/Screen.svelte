@@ -1,6 +1,7 @@
 <script>
 
 import EFM from '../algo/EulerForwardMethod.js'
+import Solver from '../algo/Solver.js'
 
   import Chart from 'chart.js'
   import { onMount } from 'svelte';
@@ -12,10 +13,11 @@ import EFM from '../algo/EulerForwardMethod.js'
   export let upperLimit;
   export let plot;
   export let initialValue
+  export let analyticalFunction
 
   let ctx,myChart;
 
-  let drawChart = (plotData, plotLabels) => {
+  let drawChart = (plotData, plotLabels, analyticalData = []) => {
     if(myChart) myChart.destroy();
 
     ctx = document.getElementById('mychart')
@@ -25,9 +27,18 @@ import EFM from '../algo/EulerForwardMethod.js'
         labels: plotLabels,
         datasets: [{
             fill : false,
+            label : 'Numercial Solution',
             data: plotData,
             backgroundColor: '#22d1ee',
             borderColor: '#3d5af1',
+            borderWidth: 2
+        },
+        {
+            fill : false,
+            label : 'Analytical Solution(if given)',
+            data: analyticalData,
+            backgroundColor: '#fccde2',
+            borderColor: '#f3558e',
             borderWidth: 2
         }]
     },
@@ -38,9 +49,6 @@ import EFM from '../algo/EulerForwardMethod.js'
                     beginAtZero: true
                 }
             }]
-        },
-        legend: {
-        display: false
         },
         tooltips: {
             callbacks: {
@@ -60,14 +68,15 @@ import EFM from '../algo/EulerForwardMethod.js'
   $: if(plot){
       console.log('From Scrren',plot)
     let data = EFM(fxy,h,lowerLimit,upperLimit,initialValue)
-      drawChart(data.yval,data.xval)
+    let yAnalytical = Solver(data.xval,analyticalFunction)
+      drawChart(data.yval,data.xval,yAnalytical)
       plot = !plot
   }  
 
 </script>
 <div class="container">
     <br><br>
-    <h3 class="is-size-4 has-text-centered">Approximate curve of <span class="tag is-large">y = f(x)</span></h3>
+    <h3 class="is-size-4 has-text-centered">Approximate curve of <span class="tag is-large">y = f(x)</span> from Numercial Solution</h3>
     <br>
     <canvas id="mychart" width="3" height="1"></canvas>
 </div>
