@@ -15,7 +15,7 @@ import Solver from '../algo/Solver.js'
   export let initialValue
   export let analyticalFunction
 
-  let ctx,myChart;
+  let ctx,myChart,data;
 
   let drawChart = (plotData, plotLabels, analyticalData = []) => {
     if(myChart) myChart.destroy();
@@ -67,7 +67,7 @@ import Solver from '../algo/Solver.js'
 
   $: if(plot){
       console.log('From Scrren',plot)
-    let data = EFM(fxy,h,lowerLimit,upperLimit,initialValue)
+    data = EFM(fxy,h,lowerLimit,upperLimit,initialValue)
     let yAnalytical = Solver(data.xval,analyticalFunction)
       drawChart(data.yval,data.xval,yAnalytical)
       plot = !plot
@@ -81,16 +81,37 @@ import Solver from '../algo/Solver.js'
     <canvas id="mychart" width="3" height="1"></canvas>
 </div>
 <br>
-<div class="container has-text-centered">
-    <h3 class="is-size-3">Solution</h3>
+    {#if data}
+<div class="container">
+    <h3 class="is-size-4"><strong>Solution :</strong></h3>
+    <p>Here the given {equation == 'ODE' ? "Ordinary Diffrential Equation" : "Partial Diffrential Equation"} is to be solved by {data.otherInfo.name} 
+    with inital x,y i.e x<sub>0</sub> = {lowerLimit} and y<sub>0</sub> = {initialValue} and the number of successive steps N = { Math.round((upperLimit - lowerLimit) / h) }.</p>
+    <p>The function is given by <strong>dy/dx = f(x,y) = { fxy }</strong></p>
+    <p>The Y values and errors in it are calculated from the formulae <strong>{@html data.otherInfo.formula }</strong></p>
     <br>
-    <p>fxy : { fxy }</p>
-    <p>method : { method }</p>
-    <p>h : { h }</p>
-    <p>equation : { equation }</p>
-    <p>initialValue : {initialValue}</p>
+    <p class="is-size-5">After the calculations are done :</p>
+    <p>The approximate solution of the given Diffrential Equation is <strong>{ data.yval[data.yval.length - 1] }</strong></p>
+    <p>The Local error in the result is <strong>{@html data.otherInfo.localError }</strong> and Global error is <strong>{@html data.otherInfo.globalError }</strong></p>
+    <br><br>
+    <h3 class="is-size-4"><strong>Calculations :</strong></h3>
+         <table class="table is-bordered is-fullwidth">
+            {#each data.xval as val,index}
+            <tr>
+                <td><strong>Step : </strong>{index + 1}</td>
+                <td><strong>X<sub>{index}</sub> : </strong>{ val }</td>
+                <td><strong>Y<sub>{index}</sub> : </strong>{ data.yval[index] }</td>
+                <td><strong>f(x,y) : </strong>{ data.fval[index] || data.fval[index] == 0 ? data.fval[index] : 'Not required'}</td>
+                <td><strong>Y<sub>{index + 1}</sub> : </strong>{ data.yval[index + 1] || data.yval[index + 1] == 0 ? data.yval[index + 1] : 'Not required'}</td>
+            </tr>
+            {/each}
+         </table>
 </div>
+    {:else}
+         <!-- else content here -->
+    {/if}
 
 <style>
-
+p{
+    font-size: 1.7erm;
+}
 </style>

@@ -1,6 +1,7 @@
 <script>
   import Screen from './components/screen.svelte'
   import Navbar from './components/Navbar.svelte'
+  import Footer from './components/Footer.svelte'
 
   let equation = 'ODE';
   let h;
@@ -160,6 +161,9 @@
 <br>
 </main>
 <Screen {equation}{h}{fxy}{method}{lowerLimit}{upperLimit}{plot}{initialValue}{analyticalFunction}/>
+<br>
+<Footer />
+
 
 <style>
 .field-label{
