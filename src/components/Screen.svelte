@@ -2,6 +2,9 @@
 
 import EulerForwardMethod from '../algo/EulerForwardMethod.js'
 import HeunMethod from '../algo/HeunMethod.js'
+import PolygonMethod from '../algo/PolygonMethod.js'
+import RalstonMethod from '../algo/RalstonMethod.js'
+import RKfourthMethod from '../algo/RKfourthMethod.js'
 import Solver from '../algo/Solver.js'
 
   import Chart from 'chart.js'
@@ -72,6 +75,12 @@ import Solver from '../algo/Solver.js'
           data = EulerForwardMethod(fxy,h,lowerLimit,upperLimit,initialValue)
       }else if(method == 'Heun'){
           data = HeunMethod(fxy,h,lowerLimit,upperLimit,initialValue)
+      }else if(method == 'Polygon'){
+          data = PolygonMethod(fxy,h,lowerLimit,upperLimit,initialValue)
+      }else if(method == 'Ralston'){
+          data = RalstonMethod(fxy,h,lowerLimit,upperLimit,initialValue)
+      }else if(method == 'RK4th'){
+          data = RKfourthMethod(fxy,h,lowerLimit,upperLimit,initialValue)
       }
     let yAnalytical = Solver(data.xval,analyticalFunction)
       drawChart(data.yval,data.xval,yAnalytical)
@@ -93,6 +102,9 @@ import Solver from '../algo/Solver.js'
     with inital x,y i.e <strong>x<sub>0</sub> = {lowerLimit} and y<sub>0</sub> = {initialValue}</strong> and the number of successive steps N = { Math.round((upperLimit - lowerLimit) / h) }.</p>
     <p>The function is given by <strong>dy/dx = f(x,y) = { fxy }</strong></p>
     <p>The Y values and errors in it are calculated from the formulae <strong>{@html data.otherInfo.formula }</strong></p>
+    {#if data.otherInfo.substitute}
+         <p><strong>{@html data.otherInfo.substitute }</strong></p>
+    {/if}
     <br>
     <p class="is-size-5">After the calculations are done :</p>
     <p>The approximate solution of the given Diffrential Equation is <strong>{ data.yval[data.yval.length - 1] }</strong></p>

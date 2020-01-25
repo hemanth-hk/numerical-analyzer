@@ -37,10 +37,9 @@
                 <select bind:value={method} on:change={() => plot = false}>
                     <option value="Euler">Euler's Forward Method</option>
                     <option value="Heun">Heun's Method</option>
-                    <!-- <option value="Heun's Method">Heun's Method</option>
-				<option value="Polygon Method (Modified Euler's Method)">Polygon Method (Modified Euler's Method)</option>
-				<option value="Ralston's Method (RK-2 Method)">Ralston's Method (RK-2 Method)</option>
-				<option value="Runge-Kutta Method (4th Order Method)">Runge-Kutta Method (4th Order Method)</option> -->
+                    <option value="Polygon">Polygon Method</option>
+                    <option value="Ralston">Ralston's Method</option>
+                    <option value="RK4th">4th Order Runge-Kutta Method</option>
                 </select>
                 {:else}
                 <select>
