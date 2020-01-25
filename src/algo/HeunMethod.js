@@ -32,8 +32,8 @@ function HeunMethod(fxy, h, lowerLimit, upperLimit, initialValue) {
             aval.push(round((0.5 * h * (evaluate(fxy, { x: beforeX, y: beforeY }) + evaluate(fxy, { x: (beforeX + h), y: (beforeY + h * evaluate(fxy, { x: beforeX, y: beforeY })) }))), 5))
         }
 
-        xval.push(round(endX, 4))
-        yval.push(round(endY, 4))
+        xval.push(round(endX, 5))
+        yval.push(round(endY, 5))
 
         return { xval, yval, aval, otherInfo };
     } catch (e) {
