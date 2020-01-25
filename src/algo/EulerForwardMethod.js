@@ -1,6 +1,7 @@
 import { evaluate, round } from 'mathjs'
 
-function EFM(fxy, h, lowerLimit, upperLimit, initialValue) {
+
+function EulerForwardMethod(fxy, h, lowerLimit, upperLimit, initialValue) {
     try {
         let count = Math.round((upperLimit - lowerLimit) / h)
         let endX = lowerLimit;
@@ -10,10 +11,10 @@ function EFM(fxy, h, lowerLimit, upperLimit, initialValue) {
             i;
         let xval = []
         let yval = []
-        let fval = []
+        let aval = []
         let otherInfo = {
             name: "Euler's Forward Method",
-            formula: "y<sub>i+1</sub> = y<sub>i</sub> + h*f(x<sub>i</sub>,y<sub>i</sub>)",
+            formula: "y<sub>i+1</sub> = y<sub>i</sub> + h*f(x<sub>i</sub>,y<sub>i</sub>) i.e y<sub>i+1</sub> = y<sub>i</sub> + A",
             localError: `O(h<sup>2</sup>) = O(${round(h*h,4)})`,
             globalError: `O(h) = O(${round(h,4)})`
         }
@@ -28,17 +29,17 @@ function EFM(fxy, h, lowerLimit, upperLimit, initialValue) {
             endX = beforeX + h
             endY = beforeY + h * evaluate(fxy, { x: beforeX, y: beforeY })
 
-            fval.push(round(evaluate(fxy, { x: beforeX, y: beforeY }), 4))
+            aval.push(round((h * evaluate(fxy, { x: beforeX, y: beforeY })), 4))
         }
 
         xval.push(round(endX, 4))
         yval.push(round(endY, 4))
 
-        return { xval, yval, fval, otherInfo };
+        return { xval, yval, aval, otherInfo };
     } catch (e) {
         alert("f(x,y) is not a valid function")
         return {}
     }
 }
 
-export default EFM;
+export default EulerForwardMethod;
