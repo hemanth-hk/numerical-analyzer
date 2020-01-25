@@ -1,12 +1,12 @@
 # Numerical Analyzer
 
-### Live at [https://numerical-analyzer.netlify.com/](https://numerical-analyzer.netlify.com/)
+### Live at [https://numerical-analyzer.netlify.com/](https://numerical-analyzer.netlify.com/){:target="_blank"}
 
 ## Things Used :
-1) [Svelte js](https://svelte.dev/) (Wanted to use it for a loooong time)
-2) [Chart js](https://www.chartjs.org/) (For those charts)
-3) [Bulma](https://bulma.io/) (For CSS and Flex-Box)
-4) [Math js](https://mathjs.org/) (For equations and calculations)
+1) [Svelte js](https://svelte.dev/){:target="_blank"} (Wanted to use it for a loooong time)
+2) [Chart js](https://www.chartjs.org/){:target="_blank"} (For those charts)
+3) [Bulma](https://bulma.io/){:target="_blank"} (For CSS and Flex-Box)
+4) [Math js](https://mathjs.org/){:target="_blank"} (For equations and calculations)
 
 ## What this does :
 This web-app solves and graphs any first order ordinary diffrential equation by using 5 numerical methods which are single-stepped   
