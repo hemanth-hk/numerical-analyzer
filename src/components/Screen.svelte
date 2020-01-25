@@ -1,6 +1,7 @@
 <script>
 
-import EFM from '../algo/EulerForwardMethod.js'
+import EulerForwardMethod from '../algo/EulerForwardMethod.js'
+import HeunMethod from '../algo/HeunMethod.js'
 import Solver from '../algo/Solver.js'
 
   import Chart from 'chart.js'
@@ -67,11 +68,15 @@ import Solver from '../algo/Solver.js'
 
   $: if(plot){
       console.log('From Scrren',plot)
-    data = EFM(fxy,h,lowerLimit,upperLimit,initialValue)
+      if(method == 'Euler'){
+          data = EulerForwardMethod(fxy,h,lowerLimit,upperLimit,initialValue)
+      }else if(method == 'Heun'){
+          data = HeunMethod(fxy,h,lowerLimit,upperLimit,initialValue)
+      }
     let yAnalytical = Solver(data.xval,analyticalFunction)
       drawChart(data.yval,data.xval,yAnalytical)
       plot = !plot
-  }  
+  }
 
 </script>
 <div class="container">
@@ -85,7 +90,7 @@ import Solver from '../algo/Solver.js'
 <div class="container">
     <h3 class="is-size-4"><strong>Solution :</strong></h3>
     <p>Here the given {equation == 'ODE' ? "Ordinary Diffrential Equation" : "Partial Diffrential Equation"} is to be solved by {data.otherInfo.name} 
-    with inital x,y i.e x<sub>0</sub> = {lowerLimit} and y<sub>0</sub> = {initialValue} and the number of successive steps N = { Math.round((upperLimit - lowerLimit) / h) }.</p>
+    with inital x,y i.e <strong>x<sub>0</sub> = {lowerLimit} and y<sub>0</sub> = {initialValue}</strong> and the number of successive steps N = { Math.round((upperLimit - lowerLimit) / h) }.</p>
     <p>The function is given by <strong>dy/dx = f(x,y) = { fxy }</strong></p>
     <p>The Y values and errors in it are calculated from the formulae <strong>{@html data.otherInfo.formula }</strong></p>
     <br>
@@ -100,7 +105,7 @@ import Solver from '../algo/Solver.js'
                 <td><strong>Step : </strong>{index + 1}</td>
                 <td><strong>X<sub>{index}</sub> : </strong>{ val }</td>
                 <td><strong>Y<sub>{index}</sub> : </strong>{ data.yval[index] }</td>
-                <td><strong>f(x,y) : </strong>{ data.fval[index] || data.fval[index] == 0 ? data.fval[index] : 'Not required'}</td>
+                <td><strong>A : </strong>{ data.aval[index] || data.aval[index] == 0 ? data.aval[index] : 'Not required'}</td>
                 <td><strong>Y<sub>{index + 1}</sub> : </strong>{ data.yval[index + 1] || data.yval[index + 1] == 0 ? data.yval[index + 1] : 'Not required'}</td>
             </tr>
             {/each}

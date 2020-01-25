@@ -35,9 +35,8 @@
             <div class="select is-primary">
                 {#if equation == 'ODE' }
                 <select bind:value={method} on:change={() => plot = false}>
-                    <option value="Euler's Forward Method">Euler's Forward Method</option>
-                    <!-- <option value="Euler's Forward Method">Euler's Backward Method</option>
-                    <option value="Euler's Forward Method">Mid point Method</option> -->
+                    <option value="Euler">Euler's Forward Method</option>
+                    <option value="Heun">Heun's Method</option>
                     <!-- <option value="Heun's Method">Heun's Method</option>
 				<option value="Polygon Method (Modified Euler's Method)">Polygon Method (Modified Euler's Method)</option>
 				<option value="Ralston's Method (RK-2 Method)">Ralston's Method (RK-2 Method)</option>
