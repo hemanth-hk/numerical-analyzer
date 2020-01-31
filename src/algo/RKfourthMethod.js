@@ -18,7 +18,7 @@ function RKfourthMethod(fxy, h, lowerLimit, upperLimit, initialValue) {
         let aval = []
         let otherInfo = {
             name: "Ralston Method",
-            formula: "y<sub>i+1</sub> = y<sub>i</sub> + (h/3)*(m<sub>1</sub> + 2m<sub>2</sub>) i.e y<sub>i+1</sub> = y<sub>i</sub> + A",
+            formula: "y<sub>i+1</sub> = y<sub>i</sub> + (h/6)*(m<sub>1</sub> + 2m<sub>2</sub> + 2m<sub>3</sub> + m<sub>4</sub>) i.e y<sub>i+1</sub> = y<sub>i</sub> + A",
             localError: `O(h<sup>5</sup>) = O(${round(h*h*h*h*h,4)})`,
             globalError: `O(h<sup>4</sup>) = O(${round(h*h*h*h,4)})`,
             substitute: "Where:  <br>m<sub>1</sub> = f(x<sub>i</sub> , y<sub>i</sub>) <br>m<sub>2</sub> = f(x<sub>i</sub> + h/2 , y<sub>i</sub>+m<sub>1</sub>*h/2 ) <br> m<sub>3</sub> = f(x<sub>i</sub> + h/2 , y<sub>i</sub>+m<sub>2</sub>*h/2 ) <br> m<sub>4</sub> = f(x<sub>i</sub> + h , y<sub>i</sub>+m<sub>3</sub>*h )"
