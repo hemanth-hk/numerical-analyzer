@@ -118,7 +118,7 @@
     <br>
     <div class="optional">
         <br>
-        <p class="is-size-6 has-text-centered">This is an optional input. If you know the analytical solution of the diffrential equation and want to plot along-with numerical solution, then input the equation</p><br>
+        <p class="is-size-6 has-text-centered">This is an optional input. If you know the analytical solution of the differential equation and want to plot along-with numerical solution, then input the equation</p><br>
         <div class="level">
             <div class="level-item has-text-centered">
                 <div class="field is-horizontal">
