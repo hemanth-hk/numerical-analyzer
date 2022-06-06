@@ -16,7 +16,7 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "mathjs": "^7.5.1",
     "sirv-cli": "^0.4.4"
   }
